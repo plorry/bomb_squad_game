@@ -6,21 +6,20 @@ var Director = require('./game').Director;
 var Walkman = sprites.Walkman;
 
 gamejs.preload([
+  //backgrounds
+  './static/backgrounds/death1b.png',
+  './static/backgrounds/death2.png',
   //graphics
   'static/sprites/gu-con.png',
   //sounds
   'static/sounds/testo.ogg'
 ]);
-var speed = 7;
 
-var sounds = {
-  'test': function(){
-    (new gamejs.mixer.Sound('static/sounds/testo.ogg')).play();
-  }
-};
+
 
 function main() {
-    var megaman = new Megaman([0,0]);
+    /*
+    var walkman = new Walkman([0,0]);
     t=5;
 
     var display = gamejs.display.setMode([600, 400]);
@@ -36,24 +35,27 @@ function main() {
               direction[gamejs.event.K_LEFT] = [-speed, 0];
               direction[gamejs.event.K_RIGHT] = [speed, 0];
               if (event.type === gamejs.event.KEY_DOWN){
-                megaman.speed = direction[event.key];
+                walkman.speed = direction[event.key];
                 sounds.test();
               }
               else if (event.type === gamejs.event.KEY_UP) {
-                megaman.speed = 0;
+                walkman.speed = 0;
               }
             });
 
             display.fill("#FFF")
             t++;
-            megaman.update(msDuration);
-            megaman.draw(mainSurface);
+            walkman.update(msDuration);
+            walkman.draw(mainSurface);
             display.blit(
                 (new gamejs.font.Font('30px Sans-serif')).render(t)
             );
         return;
-    }
-    gamejs.time.fpsCallback(tick, this, 30);
+    }*/
+    var director = new Director();
+    var firstScene = new scenes.Cutscene(director, 0);
+    director.start(firstScene);
+    return;
 }
 
 gamejs.ready(main);
