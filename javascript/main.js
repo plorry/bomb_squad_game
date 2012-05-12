@@ -13,7 +13,10 @@ gamejs.preload([
   './static/bombs/bomb_1.png',
   './static/bombs/wire_red.png',
   './static/bombs/wire_green.png',
+  './static/bombs/wire_green_cut.png',
+
   'static/sprites/gu-con.png',
+  './static/icons/snippers_open.png',
   //sounds
   'static/sounds/testo.ogg'
 ]);

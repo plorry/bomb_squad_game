@@ -6,6 +6,7 @@ var Walkman = sprites.Walkman;
 var image_rect = [0,0,320,240];
 
 var Wire = sprites.Wire;
+var Pointer = sprites.Pointer;
 
 var sounds = {
   'test': function(){
@@ -61,27 +62,51 @@ var Cutscene = exports.Cutscene = function(director, cutsceneId) {
 }
 
 var Bomb = exports.Bomb = function(director, bombId) {
-	this.handleEvent = function(event){
+	this.handleEvent = function(event) {
+		//Gotta re-position the mouse coords based on the scale of the surface
+		event.pos = [event.pos[0] / config.SCALE, event.pos[1] / config.SCALE];
 
+		if (event.type === gamejs.event.MOUSE_DOWN) {
+			var wiresClickedOn = wires.collidePoint(event.pos);
+			if (wiresClickedOn.length > 0) {
+				wiresClickedOn.forEach(function(wire){
+					wire.cut();
+				});
+			}
+		}
+
+		if (wires.collidePoint(event.pos).length > 0) {
+			pointer.setSnippers();
+		} else {
+			pointer.setNull();
+		}
+
+		pointer.setPos(event.pos);
 	};
 
 	this.update = function(msDuration) {
-
+		wires.forEach(function(wire){
+			wire.update(msDuration);
+		});
+		pointer.update(msDuration);
 	};
 
 	this.draw = function(display) {
 		display.fill("#ffffff");
 		display.blit(image);
 		wires.draw(display);
+		pointer.draw(display);
 	};
 
 	function initBomb(bombConfig) {
 		image = gamejs.image.load(bombConfig.image);
+		pointer = new Pointer(config.pointer[0]);
 
 		wires = new gamejs.sprite.Group();
 		bombConfig.wires.forEach(function(w){
 			wires.add(new Wire(w));
 		});
+
 	};
 
 	var bombId = bombId || 0;

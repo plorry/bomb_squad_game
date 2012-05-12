@@ -1,5 +1,7 @@
-exports.WIDTH = 640;
-exports.HEIGHT = 480;
+exports.WIDTH = 320;
+exports.HEIGHT = 240;
+
+exports.SCALE = 2;
 
 
 exports.cutscenes = [
@@ -8,5 +10,9 @@ exports.cutscenes = [
 ];
 
 exports.bombs = [
-	{"image":'./static/bombs/bomb_1.png', 'music':'', 'wires':[{'image':'./static/bombs/wire_red.png','pos':[0,100]},{'image':'./static/bombs/wire_green.png','pos':[0,130]}]}
-]
+	{"image":'./static/bombs/bomb_1.png', 'music':'', 'wires':[{'image':['./static/bombs/wire_red.png','./static/bombs/wire_green_cut.png'],'pos':[0,100]},{'image':['./static/bombs/wire_red.png','./static/bombs/wire_green_cut.png'],'pos':[0,130]}]}
+];
+
+exports.pointer = [
+	{"snippers":'./static/icons/snippers_open.png'}
+];
