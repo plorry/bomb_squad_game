@@ -9,6 +9,9 @@ var Wire = sprites.Wire;
 var Pointer = sprites.Pointer;
 var font = new gamejs.font.Font('20px monospace');
 
+var TIMER_COLOR = '#F00F00';
+var TIMER_POS = [90,50];
+
 var sounds = {
   'test': function(){
     (new gamejs.mixer.Sound('static/sounds/testo.ogg')).play();
@@ -114,12 +117,18 @@ var Bomb = exports.Bomb = function(director, bombId) {
 			wire.update(msDuration);
 		});
 		pointer.update(msDuration);
-		timer -= msDuration;
+		timer -= (msDuration / 10);
+		timer = timer.toFixed(0);
 		if (timer > 0) {
-			timer_display = font.render(String(timer), '#333');
+			timer_string = String(timer);
+			while(timer_string.length < 4){
+				timer_string = '0' + timer_string;
+			}
+			timer_string = timer_string.substring(0,2) + ':' + timer_string.substring(2);
+			timer_display = font.render(timer_string, TIMER_COLOR);
 		}
 		if (timer < 0) {
-			timer_display = font.render("0", '#333');
+			timer_display = font.render("00:00", TIMER_COLOR);
 		}
 		step_no = font.render(String(step), '#555');
 
@@ -135,7 +144,7 @@ var Bomb = exports.Bomb = function(director, bombId) {
 		wires.draw(display);
 		
 		display.blit(step_no, [200,10]);
-		display.blit(timer_display, [5,10]);
+		display.blit(timer_display, TIMER_POS);
 
 		if (!pointer.isHidden){
 			pointer.draw(display);
@@ -151,7 +160,8 @@ var Bomb = exports.Bomb = function(director, bombId) {
 			wires.add(new Wire(w));
 		});
 		timer = bombConfig.timer;
-		timer_display = font.render(String(timer), '#333');
+		timer_string = String(timer);
+		timer_display = font.render(timer_string, TIMER_COLOR);
 		step_no = font.render(String(step), '#555');
 
 	};
