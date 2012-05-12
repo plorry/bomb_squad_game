@@ -1,7 +1,9 @@
 var gamejs = require('gamejs');
 var sprites = require('./sprites');
+var scenes = require('./scenes');
+var Director = require('./game').Director;
 
-var Megaman = sprites.Megaman;
+var Walkman = sprites.Walkman;
 
 gamejs.preload([
   //graphics
