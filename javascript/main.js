@@ -12,8 +12,11 @@ gamejs.preload([
   //graphics
   './static/bombs/bomb_1.png',
   './static/bombs/wire_red.png',
+  './static/bombs/wire_red_cut.png',
   './static/bombs/wire_green.png',
   './static/bombs/wire_green_cut.png',
+  './static/bombs/wire_blue.png',
+  './static/bombs/wire_blue_cut.png',
   './static/bombs/panel_down.png',
   './static/bombs/panel_up.png',
 
