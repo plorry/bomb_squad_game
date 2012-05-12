@@ -10,6 +10,9 @@ gamejs.preload([
   './static/backgrounds/death1b.png',
   './static/backgrounds/death2.png',
   //graphics
+  './static/bombs/bomb_1.png',
+  './static/bombs/wire_red.png',
+  './static/bombs/wire_green.png',
   'static/sprites/gu-con.png',
   //sounds
   'static/sounds/testo.ogg'
@@ -53,7 +56,7 @@ function main() {
         return;
     }*/
     var director = new Director();
-    var firstScene = new scenes.Cutscene(director, 0);
+    var firstScene = new scenes.Bomb(director, 0);
     director.start(firstScene);
     return;
 }

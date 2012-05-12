@@ -18,3 +18,17 @@ gamejs.utils.objects.extend(Walkman, gamejs.sprite.Sprite);
 Walkman.prototype.update = function(msDuration){
   this.rect.moveIp(this.speed[0], this.speed[1]);
 };
+
+var Wire = exports.Wire = function(options) {
+   Wire.superConstructor.apply(this, arguments);
+
+   this.image = gamejs.image.load(options.image);
+   this.rect = new gamejs.Rect(options.pos, [this.image.rect.width, this.image.rect.height]);
+
+   return this;
+};
+gamejs.utils.objects.extend(Wire, gamejs.sprite.Sprite);
+
+Wire.prototype.update = function(msDuration) {
+   return;
+};
