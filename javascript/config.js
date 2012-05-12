@@ -10,7 +10,7 @@ exports.cutscenes = [
 ];
 
 exports.bombs = [
-	{"image":'./static/bombs/bomb_1.png', 'music':'', 'wires':[{'image':['./static/bombs/wire_red.png','./static/bombs/wire_green_cut.png'],'pos':[0,100]},{'image':['./static/bombs/wire_red.png','./static/bombs/wire_green_cut.png'],'pos':[0,130]}]}
+	{'timer':30 * 1000,"image":'./static/bombs/bomb_1.png', 'music':'', 'traps':[{'order':0,'image':['./static/bombs/wire_red.png','./static/bombs/wire_green_cut.png'],'pos':[0,100]},{'order':1,'image':['./static/bombs/wire_green.png','./static/bombs/wire_green_cut.png'],'pos':[0,130]}]}
 ];
 
 exports.pointer = [

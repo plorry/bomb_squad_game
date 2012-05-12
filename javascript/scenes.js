@@ -7,6 +7,7 @@ var image_rect = [0,0,320,240];
 
 var Wire = sprites.Wire;
 var Pointer = sprites.Pointer;
+var font = new gamejs.font.Font('20px monospace');
 
 var sounds = {
   'test': function(){
@@ -62,6 +63,9 @@ var Cutscene = exports.Cutscene = function(director, cutsceneId) {
 }
 
 var Bomb = exports.Bomb = function(director, bombId) {
+
+	var step = 0;
+
 	this.handleEvent = function(event) {
 		//Gotta re-position the mouse coords based on the scale of the surface
 		event.pos = [event.pos[0] / config.SCALE, event.pos[1] / config.SCALE];
@@ -70,7 +74,10 @@ var Bomb = exports.Bomb = function(director, bombId) {
 			var wiresClickedOn = wires.collidePoint(event.pos);
 			if (wiresClickedOn.length > 0) {
 				wiresClickedOn.forEach(function(wire){
-					wire.cut();
+					if (!wire.isCut){
+						wire.cut();
+						step++;
+					}
 				});
 			}
 		}
@@ -89,13 +96,22 @@ var Bomb = exports.Bomb = function(director, bombId) {
 			wire.update(msDuration);
 		});
 		pointer.update(msDuration);
+		timer -= msDuration;
+		timer_display = font.render(String(timer), '#333');
+		step_no = font.render(String(step), '#555');
 	};
 
 	this.draw = function(display) {
 		display.fill("#ffffff");
 		display.blit(image);
 		wires.draw(display);
-		pointer.draw(display);
+		
+		display.blit(step_no, [200,10]);
+		display.blit(timer_display, [5,10]);
+
+		if (!pointer.isHidden){
+			pointer.draw(display);
+		}
 	};
 
 	function initBomb(bombConfig) {
@@ -103,9 +119,12 @@ var Bomb = exports.Bomb = function(director, bombId) {
 		pointer = new Pointer(config.pointer[0]);
 
 		wires = new gamejs.sprite.Group();
-		bombConfig.wires.forEach(function(w){
+		bombConfig.traps.forEach(function(w){
 			wires.add(new Wire(w));
 		});
+		timer = bombConfig.timer;
+		timer_display = font.render(String(timer), '#333');
+		step_no = font.render(String(step), '#555');
 
 	};
 

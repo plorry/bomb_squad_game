@@ -56,6 +56,7 @@ var Pointer = exports.Pointer = function(options) {
    this.image_static = null;
    this.image_snippers_open = gamejs.image.load(options.snippers);
    this.rect = new gamejs.Rect([0,0,72,72]);
+   this.isHidden = true;
    this.isSnippers = false;
 
    return this;
@@ -66,9 +67,11 @@ Pointer.prototype.update = function(msDuration) {
    if (this.isSnippers) {
       this.image = this.image_snippers_open;
       document.body.style.cursor = "none";
+      this.isHidden = false;
    } else {
       this.image = this.image_static;
       document.body.style.cursor = "default";
+      this.isHidden = false;
    }
    return;
 };
@@ -83,6 +86,8 @@ Pointer.prototype.setSnippers = function() {
 
 Pointer.prototype.setNull = function() {
    this.isSnippers = false;
+   this.isHidden = true;
+   return;
 };
 
 Pointer.prototype.setPos = function(position) {
