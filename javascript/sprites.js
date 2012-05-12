@@ -23,8 +23,10 @@ var Wire = exports.Wire = function(options) {
    Wire.superConstructor.apply(this, arguments);
 
    this.image = gamejs.image.load(options.image[0]);
-
    this.image_cut = gamejs.image.load(options.image[1]);
+   this.pos = options.pos;
+   this.order = options.order;
+
    this.rect = new gamejs.Rect(options.pos, [this.image.rect.width, this.image.rect.height]);
 
    this.isCut = false;
@@ -36,6 +38,7 @@ gamejs.utils.objects.extend(Wire, gamejs.sprite.Sprite);
 Wire.prototype.update = function(msDuration) {
    if (this.isCut) {
       this.image = this.image_cut;
+      this.rect = new gamejs.Rect(this.pos, [this.image.rect.width, this.image.rect.height]);
    }
    return;
 };
@@ -45,6 +48,7 @@ Wire.prototype.cut = function() {
       return;
    }
    this.isCut = true;
+
    return;
 };
 

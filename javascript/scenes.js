@@ -12,8 +12,20 @@ var font = new gamejs.font.Font('20px monospace');
 var sounds = {
   'test': function(){
     (new gamejs.mixer.Sound('static/sounds/testo.ogg')).play();
+  },
+  'snip': function(){
+  	(new gamejs.mixer.Sound('static/sounds/snip.ogg')).play();
+  },
+  'error': function(){
+  	(new gamejs.mixer.Sound('static/sounds/error.ogg')).play();
   }
 };
+/*
+var death_sounds = {
+	'death_02': function(){
+		(new gamejs.mixer.Sound('static/sounds/death_02.ogg')).play();
+	}
+}*/
 
 var Cutscene = exports.Cutscene = function(director, cutsceneId) {
 	this.handleEvent = function(event) {
@@ -47,7 +59,7 @@ var Cutscene = exports.Cutscene = function(director, cutsceneId) {
 	function initCutscene(cutsceneConfig) {
 		//music = cutsceneConfig.music;
 		image = gamejs.image.load(cutsceneConfig.image);
-		//sound = cutsceneConfig.sound;
+		sound = new gamejs.mixer.Sound(cutsceneConfig.sound).play();
 		duration = cutsceneConfig.duration;
 		//image = gamejs.image.load('./static/backgrounds/death1b.png');
 		return;
@@ -76,6 +88,12 @@ var Bomb = exports.Bomb = function(director, bombId) {
 				wiresClickedOn.forEach(function(wire){
 					if (!wire.isCut){
 						wire.cut();
+						if (wire.order != step) {
+							timer = 0;
+							sounds.error();
+						} else {
+							sounds.snip();
+						}
 						step++;
 					}
 				});
@@ -97,8 +115,18 @@ var Bomb = exports.Bomb = function(director, bombId) {
 		});
 		pointer.update(msDuration);
 		timer -= msDuration;
-		timer_display = font.render(String(timer), '#333');
+		if (timer > 0) {
+			timer_display = font.render(String(timer), '#333');
+		}
+		if (timer < 0) {
+			timer_display = font.render("0", '#333');
+		}
 		step_no = font.render(String(step), '#555');
+
+		if (timer < -200) {
+			director.replaceScene(new Cutscene(director, 1));
+		}
+
 	};
 
 	this.draw = function(display) {
