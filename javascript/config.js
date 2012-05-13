@@ -5,16 +5,38 @@ exports.SCALE = 2;
 
 
 exports.cutscenes = [
-	{"image":'./static/backgrounds/death_01b.png', "music":'', "sound":'', 'duration':3000},
-	{"image":'./static/backgrounds/death_02.png', "music":'', "sound":'static/sounds/death_02.ogg', 'duration':3000},
-	{"image":'./static/backgrounds/victory_01.png', 'music':'', 'sound':'', 'duration':3000}
+	//0
+	{"panels":[
+		{'image':'./static/backgrounds/death_01b.png', "music":'','sound':'', 'duration':3000},
+	]},
+	//1
+	{"panels":[
+		{'image':'./static/backgrounds/death_02.png', "music":'', "sound":'static/sounds/death_02.ogg', 'duration':'nope'},
+		{'image':'./static/backgrounds/death_01b.png', "music":'', "sound":'static/sounds/explosion.ogg', 'duration':2000},
+	]},
+	//2
+	{"panels":[
+		{'image':'./static/backgrounds/victory_01.png', 'music':'', 'sound':'', 'duration':3000},
+	]},
+	//3
+	{"panels":[
+		{'image':'./static/backgrounds/death_05.png', "music":'', "sound":'', 'duration':1500},
+		{'image':'./static/backgrounds/death_15a.png', "music":'', "sound":'', 'duration':1500},
+		{'image':'./static/backgrounds/death_15b.png', "music":'', "sound":'', 'duration':1500},
+		{'image':'./static/backgrounds/death_15c.png', "music":'', "sound":'', 'duration':1500},
+		{'image':'./static/backgrounds/death_15d.png', "music":'', "sound":'', 'duration':1500},
+		{'image':'./static/backgrounds/death_15e.png', "music":'', "sound":'', 'duration':2500},
+		{'image':'./static/backgrounds/death_15e.png', "music":'', "sound":'static/sounds/explosion.ogg', 'duration':1500},
+	]},
 ];
 
 exports.bombs = [
-	{'timer':30 * 100,"image":'./static/bombs/bomb_1.png', 'music':'', 'traps':[
-		{'order':0,'image':['./static/bombs/wire_green.png','./static/bombs/wire_green_cut.png'],'pos':[35,170]},
-		{'order':1,'image':['./static/bombs/wire_red.png','./static/bombs/wire_red_cut.png'],'pos':[36,187]},
-		{'order':2,'image':['./static/bombs/wire_blue.png','./static/bombs/wire_blue_cut.png'],'pos':[42,209]}]}
+	{'timer':8 * 100,"image":'./static/bombs/bomb_1.png', 'music':'', 'traps':[
+		{'order':1,'image':['./static/bombs/wire_green.png','./static/bombs/wire_green_cut.png'],'pos':[35,170]},
+		{'order':2,'image':['./static/bombs/wire_red.png','./static/bombs/wire_red_cut.png'],'pos':[36,187]},
+		{'order':0,'image':['./static/bombs/wire_blue.png','./static/bombs/wire_blue_cut.png'],'pos':[42,209]},
+		{'order':3,'image':['./static/bombs/wire_yellow.png','./static/bombs/wire_yellow_cut.png'],'pos':[40,155]},
+	]},
 ];
 
 exports.pointer = [

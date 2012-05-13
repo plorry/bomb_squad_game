@@ -7,10 +7,12 @@ var image_rect = [0,0,320,240];
 
 var Wire = sprites.Wire;
 var Pointer = sprites.Pointer;
-var font = new gamejs.font.Font('20px monospace');
+var font = new gamejs.font.Font('20px Lucida Console');
 
 var TIMER_COLOR = '#F00F00';
-var TIMER_POS = [90,50];
+var TIMER_POS = [125,58];
+
+var currentLevel = 0;
 
 var sounds = {
   'test': function(){
@@ -23,14 +25,15 @@ var sounds = {
   	(new gamejs.mixer.Sound('static/sounds/error.ogg')).play();
   }
 };
-/*
-var death_sounds = {
-	'death_02': function(){
-		(new gamejs.mixer.Sound('static/sounds/death_02.ogg')).play();
-	}
-}*/
+
+//Cutscenes
 
 var Cutscene = exports.Cutscene = function(director, cutsceneId) {
+	
+	this.blast = false;
+	this.blast_centre = [config.WIDTH / 2, config.HEIGHT / 2];
+	this.blast_amount = 0;
+
 	this.handleEvent = function(event) {
 		if (event.type === gamejs.event.KEY_DOWN) {
 			sounds.test();
@@ -40,13 +43,37 @@ var Cutscene = exports.Cutscene = function(director, cutsceneId) {
 	this.update = function(msDuration) {
 		elapsed += msDuration;
 		if (elapsed >= duration){
-			cutsceneId += 1;
-			director.replaceScene(new Cutscene(director, cutsceneId));
+			currentPanel += 1;
+			if (currentPanel >= panels.length) {
+				director.replaceScene(new Bomb(director, currentLevel));
+			}
+			elapsed = 0;
+			image = gamejs.image.load(panels[currentPanel].image);
+			if (panels[currentPanel].sound != ''){
+				sound = new gamejs.mixer.Sound(panels[currentPanel].sound);
+				if (panels[currentPanel].sound == 'static/sounds/explosion.ogg') {
+					this.blast = true;
+				}
+				sound.play();
+			}
+			duration = panels[currentPanel].duration;
+
+		//	director.replaceScene(new Cutscene(director, cutsceneId));
+		}
+		if (duration == 'nope'){
+			duration = sound.getLength() * 1000;
+		}
+
+		if (this.blast) {
+			this.blast_amount += (msDuration / 3);
 		}
 	};
 
 	this.draw = function(display) {
 		display.blit(image, [0,0], image_rect);
+		if (this.blast) {
+			gamejs.draw.circle(display, "#ffffff", this.blast_centre, this.blast_amount);
+		}
 	};
 
 	this.setLevelDump = function(dump) {
@@ -61,25 +88,47 @@ var Cutscene = exports.Cutscene = function(director, cutsceneId) {
 
 	function initCutscene(cutsceneConfig) {
 		//music = cutsceneConfig.music;
-		image = gamejs.image.load(cutsceneConfig.image);
-		sound = new gamejs.mixer.Sound(cutsceneConfig.sound).play();
-		duration = cutsceneConfig.duration;
+		panels = [];
+		cutsceneConfig.panels.forEach(function(panel){
+			panels.push(panel);
+		});
+		image = gamejs.image.load(panels[currentPanel].image);
+		if (panels[currentPanel].sound != ''){
+			sound = new gamejs.mixer.Sound(panels[currentPanel].sound);
+			sound.play();
+		}
+		duration = panels[currentPanel].duration;
+		if (duration == null){
+			duration = sound.getLength();
+		}
 		//image = gamejs.image.load('./static/backgrounds/death1b.png');
 		return;
+	};
+
+	function blast(centre) {
+		this.blast = true;
+		this.blast_centre = centre;
 	};
 
 	var cutsceneId = cutsceneId || 0;
 	var cutsceneConfig = config.cutscenes[cutsceneId];
 	var elapsed = 0;
+	var currentPanel = 0;
 	var music, image, sound, duration;
 	initCutscene(cutsceneConfig);
 
 	return this;
 }
 
+//Bomb scenes
+
 var Bomb = exports.Bomb = function(director, bombId) {
 
 	var step = 0;
+	var isDefused = false;
+
+	var test_sound = new gamejs.mixer.Sound('static/sounds/testo.ogg');
+	var debug_val = 0;
 
 	this.handleEvent = function(event) {
 		//Gotta re-position the mouse coords based on the scale of the surface
@@ -96,8 +145,8 @@ var Bomb = exports.Bomb = function(director, bombId) {
 							sounds.error();
 						} else {
 							sounds.snip();
+							step++;
 						}
-						step++;
 					}
 				});
 			}
@@ -113,6 +162,8 @@ var Bomb = exports.Bomb = function(director, bombId) {
 	};
 
 	this.update = function(msDuration) {
+		debug_val = test_sound.getLength() * 1000;
+
 		wires.forEach(function(wire){
 			wire.update(msDuration);
 		});
@@ -130,10 +181,18 @@ var Bomb = exports.Bomb = function(director, bombId) {
 		if (timer < 0) {
 			timer_display = font.render("00:00", TIMER_COLOR);
 		}
-		step_no = font.render(String(step), '#555');
 
-		if (timer < -200) {
-			director.replaceScene(new Cutscene(director, 1));
+		if (timer < -100 && !isDefused) {
+			director.replaceScene(new Cutscene(director, 3));
+		}
+
+		if (timer < -100 && isDefused) {
+			director.replaceScene(new Cutscene(director, 2))
+		} 
+
+		if (step >= steps_total && !isDefused) {
+			isDefused = true;
+			timer = 0;
 		}
 
 	};
@@ -143,8 +202,9 @@ var Bomb = exports.Bomb = function(director, bombId) {
 		display.blit(image);
 		wires.draw(display);
 		
-		display.blit(step_no, [200,10]);
+		debug_val = font.render(debug_val, '#555');
 		display.blit(timer_display, TIMER_POS);
+		//display.blit(debug_val, [0,0]);
 
 		if (!pointer.isHidden){
 			pointer.draw(display);
@@ -163,6 +223,7 @@ var Bomb = exports.Bomb = function(director, bombId) {
 		timer_string = String(timer);
 		timer_display = font.render(timer_string, TIMER_COLOR);
 		step_no = font.render(String(step), '#555');
+		steps_total = bombConfig.traps.length;
 
 	};
 
