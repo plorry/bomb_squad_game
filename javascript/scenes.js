@@ -6,6 +6,7 @@ var Walkman = sprites.Walkman;
 var image_rect = [0,0,320,240];
 
 var Wire = sprites.Wire;
+var Obstacle = sprites.Obstacle;
 var Pointer = sprites.Pointer;
 var font = new gamejs.font.Font('20px Lucida Console');
 
@@ -154,7 +155,7 @@ var Bomb = exports.Bomb = function(director, bombId) {
 		
 		if (wires.collidePoint(event.pos).length > 0){
 			wires.collidePoint(event.pos).forEach(function(wire){
-				if (pointer.image != wire.icon){
+				if (pointer.image != wire.icon && !wire.isCut){
 					//debug_val = 'diff!';
 					pointer.setImage(wire.icon);
 				}
@@ -198,6 +199,7 @@ var Bomb = exports.Bomb = function(director, bombId) {
 
 		if (step >= steps_total && !isDefused) {
 			isDefused = true;
+			currentLevel++;
 			timer = 0;
 		}
 
@@ -207,6 +209,7 @@ var Bomb = exports.Bomb = function(director, bombId) {
 		display.fill("#ffffff");
 		display.blit(image);
 		wires.draw(display);
+		obstacles.draw(display);
 		
 		debug_val = font.render(debug_val, '#555');
 		display.blit(timer_display, TIMER_POS);
@@ -225,6 +228,12 @@ var Bomb = exports.Bomb = function(director, bombId) {
 		bombConfig.traps.forEach(function(w){
 			wires.add(new Wire(w));
 		});
+
+		obstacles = new gamejs.sprite.Group();
+		bombConfig.obstacles.forEach(function(o){
+			obstacles.add(new Obstacle(o));
+		});
+
 		timer = bombConfig.timer;
 		timer_string = String(timer);
 		timer_display = font.render(timer_string, TIMER_COLOR);

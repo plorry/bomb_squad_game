@@ -20,6 +20,7 @@ gamejs.preload([
   './static/backgrounds/victory_01.png',
   //graphics
   './static/bombs/bomb_1.png',
+  './static/bombs/bomb_2.png',
   './static/bombs/wire_red.png',
   './static/bombs/wire_red_cut.png',
   './static/bombs/wire_green.png',
@@ -30,6 +31,8 @@ gamejs.preload([
   './static/bombs/wire_yellow_cut.png',
   './static/bombs/panel_down.png',
   './static/bombs/panel_up.png',
+  './static/bombs/screw.png',
+  './static/bombs/unscrewed.png',
 
   './static/icons/snippers_open.png',
   //sounds

@@ -19,6 +19,25 @@ Walkman.prototype.update = function(msDuration){
   this.rect.moveIp(this.speed[0], this.speed[1]);
 };
 
+var Obstacle = exports.Obstacle = function(options) {
+   Obstacle.superConstructor.apply(this, arguments);
+   this.image = gamejs.image.load(options.image);
+   this.image_solved = gamejs.image.load(options.disarmed);
+   this.isSolved = false;
+   this.icon = options.icon;
+   this.pos = options.pos;
+   this.hidden = false;
+   this.rect = new gamejs.Rect(this.pos, [this.image.rect.width, this.image.rect.height]);
+   return this;
+};
+gamejs.utils.objects.extend(Obstacle, gamejs.sprite.Sprite);
+
+Obstacle.prototype.solve = function() {
+   this.image = this.image_solved;
+   this.isSolved = true;
+   return;
+}
+
 var Wire = exports.Wire = function(options) {
    Wire.superConstructor.apply(this, arguments);
 
