@@ -101,6 +101,7 @@ Wire.prototype.cut = function() {
       return;
    }
    this.isCut = true;
+   this.isActive = false;
    this.current_frame = 0;
    return;
 };

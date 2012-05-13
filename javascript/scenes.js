@@ -12,6 +12,7 @@ var font = new gamejs.font.Font('20px Lucida Console');
 
 var TIMER_COLOR = '#F00F00';
 var TIMER_POS = [125,58];
+var VICTORY_CUTSCENE = 0;
 
 var currentLevel = 0;
 
@@ -213,11 +214,12 @@ var Bomb = exports.Bomb = function(director, bombId) {
 		}
 
 		if (timer < -100 && !isDefused) {
-			director.replaceScene(new Cutscene(director, 3));
+			next_cutscene = Math.floor((Math.random() * 18) + 1);
+			director.replaceScene(new Cutscene(director, next_cutscene));
 		}
 
 		if (timer < -100 && isDefused) {
-			director.replaceScene(new Cutscene(director, 2))
+			director.replaceScene(new Cutscene(director, VICTORY_CUTSCENE))
 		} 
 
 		if (step >= steps_total && !isDefused) {
