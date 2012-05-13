@@ -12,8 +12,12 @@ var font = new gamejs.font.Font('20px Lucida Console');
 
 var TIMER_COLOR = '#F00F00';
 var TIMER_POS = [125,58];
+//Cutscene IDs
 var VICTORY_CUTSCENE = 0;
-var JOKE_CUTSCENES = [1,18];
+var OPENING_CUTSCENE = 1;
+var BOMB1_VICTORY = 2;
+var BOMB2_VICTORY = 3;
+var JOKE_CUTSCENES = [4,18];
 
 var currentLevel = 0;
 
@@ -31,6 +35,8 @@ var sounds = {
 
 //Cutscenes
 
+ 
+
 var Cutscene = exports.Cutscene = function(director, cutsceneId) {
 	
 	this.blast = false;
@@ -45,7 +51,7 @@ var Cutscene = exports.Cutscene = function(director, cutsceneId) {
 
 	this.update = function(msDuration) {
 		elapsed += msDuration;
-		if (elapsed >= duration){
+		if (elapsed >= duration || elapsed >=4000){
 			currentPanel += 1;
 			if (currentPanel >= panels.length) {
 				director.replaceScene(new Bomb(director, currentLevel));

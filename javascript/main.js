@@ -35,6 +35,17 @@ gamejs.preload([
   './static/backgrounds/death_06.png',
   './static/backgrounds/death_14.png',
   './static/backgrounds/victory_01.png',
+  './static/backgrounds/death_22a.png',
+  './static/backgrounds/death_22b.png',
+  './static/backgrounds/death_22c.png',
+  './static/backgrounds/death_22d.png',
+  './static/backgrounds/death_22e.png',
+  './static/backgrounds/death_22f.png',
+  './static/backgrounds/opening_01.png',
+  './static/backgrounds/opening_02.png',
+  './static/backgrounds/opening_03.png',
+  './static/backgrounds/opening_04.png',
+  './static/backgrounds/opening_05.png',
   //graphics
   './static/bombs/bomb_1.png',
   './static/bombs/bomb_2.png',
@@ -107,7 +118,7 @@ gamejs.preload([
 function main() {
 
     var director = new Director();
-    var firstScene = new scenes.Bomb(director, 0);
+    var firstScene = new scenes.Cutscene(director, 1);
     director.start(firstScene);
     return;
 
