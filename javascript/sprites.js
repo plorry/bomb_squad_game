@@ -22,10 +22,21 @@ Walkman.prototype.update = function(msDuration){
 var Wire = exports.Wire = function(options) {
    Wire.superConstructor.apply(this, arguments);
 
-   this.image = gamejs.image.load(options.image[0]);
-   this.image_cut = gamejs.image.load(options.image[1]);
+   this.elapsed = 0;
+   this.current_frame = 0;
+   this.animation = options.image;
+   this.disarmed_frames = options.disarmed;
+   this.image = gamejs.image.load(this.animation[this.current_frame]);
+   this.image_cut = gamejs.image.load(this.disarmed_frames[this.current_frame]);
    this.pos = options.pos;
+   this.icon = options.icon;
    this.order = options.order;
+
+   if (options.hidden == undefined) {
+      this.isHidden = false;
+   } else {
+      this.isHidden = true;
+   }
 
    this.rect = new gamejs.Rect(options.pos, [this.image.rect.width, this.image.rect.height]);
 
@@ -37,9 +48,21 @@ gamejs.utils.objects.extend(Wire, gamejs.sprite.Sprite);
 
 Wire.prototype.update = function(msDuration) {
    if (this.isCut) {
-      this.image = this.image_cut;
-      this.rect = new gamejs.Rect(this.pos, [this.image.rect.width, this.image.rect.height]);
+      this.animation = this.disarmed_frames;
+      this.image = gamejs.image.load(this.animation[this.current_frame]);
    }
+
+   if (this.elapsed >= 333 && this.animation.length > 1) {
+      this.elapsed = 0;
+      if (this.current_frame < (this.animation.length - 1)) {
+         this.current_frame++;
+      } else {
+         this.current_frame = 0;
+      }
+   }
+   this.elapsed += msDuration;
+   this.rect = new gamejs.Rect(this.pos, [this.image.rect.width, this.image.rect.height]);
+
    return;
 };
 
@@ -48,7 +71,7 @@ Wire.prototype.cut = function() {
       return;
    }
    this.isCut = true;
-
+   this.current_frame = 0;
    return;
 };
 
@@ -58,38 +81,34 @@ var Pointer = exports.Pointer = function(options) {
    Pointer.superConstructor.apply(this, arguments);
 
    this.image_static = null;
-   this.image_snippers_open = gamejs.image.load(options.snippers);
    this.rect = new gamejs.Rect([0,0,72,72]);
    this.isHidden = true;
-   this.isSnippers = false;
+   //this.isSnippers = false;
 
    return this;
 };
 gamejs.utils.objects.extend(Pointer, gamejs.sprite.Sprite);
 
 Pointer.prototype.update = function(msDuration) {
-   if (this.isSnippers) {
-      this.image = this.image_snippers_open;
+
+   if (this.image != null) {
       document.body.style.cursor = "none";
       this.isHidden = false;
    } else {
       this.image = this.image_static;
       document.body.style.cursor = "default";
-      this.isHidden = false;
+      this.isHidden = true;
    }
    return;
 };
 
-Pointer.prototype.setSnippers = function() {
-   if (this.isSnippers === true){
-      return;
-   }
-   this.isSnippers = true;
+Pointer.prototype.setImage = function(new_image) {
+   this.image = gamejs.image.load(new_image);
    return;
 };
 
 Pointer.prototype.setNull = function() {
-   this.isSnippers = false;
+   this.image = null;
    this.isHidden = true;
    return;
 };

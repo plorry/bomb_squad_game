@@ -138,7 +138,7 @@ var Bomb = exports.Bomb = function(director, bombId) {
 			var wiresClickedOn = wires.collidePoint(event.pos);
 			if (wiresClickedOn.length > 0) {
 				wiresClickedOn.forEach(function(wire){
-					if (!wire.isCut){
+					if (!wire.isCut && !wire.isHidden){
 						wire.cut();
 						if (wire.order != step) {
 							timer = 0;
@@ -151,18 +151,24 @@ var Bomb = exports.Bomb = function(director, bombId) {
 				});
 			}
 		}
-
-		if (wires.collidePoint(event.pos).length > 0) {
-			pointer.setSnippers();
+		
+		if (wires.collidePoint(event.pos).length > 0){
+			wires.collidePoint(event.pos).forEach(function(wire){
+				if (pointer.image != wire.icon){
+					//debug_val = 'diff!';
+					pointer.setImage(wire.icon);
+				}
+			});
 		} else {
-			pointer.setNull();
+			if (pointer.image != null) {
+				pointer.setNull();
+			}
 		}
 
 		pointer.setPos(event.pos);
 	};
 
 	this.update = function(msDuration) {
-		debug_val = test_sound.getLength() * 1000;
 
 		wires.forEach(function(wire){
 			wire.update(msDuration);

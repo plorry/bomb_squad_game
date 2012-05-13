@@ -9,7 +9,7 @@ exports.cutscenes = [
 	{"panels":[
 		{'image':'./static/backgrounds/death_01b.png', "music":'','sound':'', 'duration':3000},
 	]},
-	//1
+	//1 - harder than I thought
 	{"panels":[
 		{'image':'./static/backgrounds/death_02.png', "music":'', "sound":'static/sounds/death_02.ogg', 'duration':'nope'},
 		{'image':'./static/backgrounds/death_01b.png', "music":'', "sound":'static/sounds/explosion.ogg', 'duration':2000},
@@ -18,7 +18,7 @@ exports.cutscenes = [
 	{"panels":[
 		{'image':'./static/backgrounds/victory_01.png', 'music':'', 'sound':'', 'duration':3000},
 	]},
-	//3
+	//3 - deer in the woods
 	{"panels":[
 		{'image':'./static/backgrounds/death_05.png', "music":'', "sound":'', 'duration':1500},
 		{'image':'./static/backgrounds/death_15a.png', "music":'', "sound":'', 'duration':1500},
@@ -31,11 +31,17 @@ exports.cutscenes = [
 ];
 
 exports.bombs = [
-	{'timer':8 * 100,"image":'./static/bombs/bomb_1.png', 'music':'', 'traps':[
-		{'order':1,'image':['./static/bombs/wire_green.png','./static/bombs/wire_green_cut.png'],'pos':[35,170]},
-		{'order':2,'image':['./static/bombs/wire_red.png','./static/bombs/wire_red_cut.png'],'pos':[36,187]},
-		{'order':0,'image':['./static/bombs/wire_blue.png','./static/bombs/wire_blue_cut.png'],'pos':[42,209]},
-		{'order':3,'image':['./static/bombs/wire_yellow.png','./static/bombs/wire_yellow_cut.png'],'pos':[40,155]},
+	{'timer':15 * 100,"image":'./static/bombs/bomb_1.png', 'music':'', 'traps':[
+		{'order':1,'image':['./static/bombs/wire_green.png',],'disarmed':['./static/bombs/wire_green_cut.png',],'pos':[35,170], 'icon':'./static/icons/snippers_open.png'},
+		{'order':2,'image':['./static/bombs/wire_red.png',],'disarmed':['./static/bombs/wire_red_cut.png'],'pos':[36,187], 'icon':'./static/icons/snippers_open.png'},
+		{'order':0,'image':['./static/bombs/wire_blue.png',],'disarmed':['./static/bombs/wire_blue_cut.png'],'pos':[42,209], 'icon':'./static/icons/snippers_open.png'},
+		{'order':3,'image':['./static/bombs/wire_yellow.png',],'disarmed':['./static/bombs/wire_yellow_cut.png'],'pos':[40,155], 'icon':'./static/icons/snippers_open.png'},
+	]},
+	{'timer':15 * 100,"image":'./static/bombs/bomb_2.png', 'music':'', 'traps':[
+		{'order':1,'image':['./static/bombs/wire_green.png',],'disarmed':['./static/bombs/wire_green_cut.png',],'pos':[35,170], 'icon':'snippers'},
+		{'order':2,'image':['./static/bombs/wire_red.png',],'disarmed':['./static/bombs/wire_red_cut.png'],'pos':[36,187], 'icon':'snippers'},
+		{'order':0,'image':['./static/bombs/wire_blue.png',],'disarmed':['./static/bombs/wire_blue_cut.png'],'pos':[42,209], 'icon':'snippers'},
+		{'order':3,'image':['./static/bombs/wire_yellow.png',],'disarmed':['./static/bombs/wire_yellow_cut.png'],'pos':[40,155], 'icon':'snippers'},
 	]},
 ];
 
