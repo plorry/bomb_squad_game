@@ -27,6 +27,7 @@ var Obstacle = exports.Obstacle = function(options) {
    this.icon = options.icon;
    this.pos = options.pos;
    this.hidden = false;
+   this.trap_id = options.trap_id;
    this.rect = new gamejs.Rect(this.pos, [this.image.rect.width, this.image.rect.height]);
    return this;
 };
@@ -36,7 +37,11 @@ Obstacle.prototype.solve = function() {
    this.image = this.image_solved;
    this.isSolved = true;
    return;
-}
+};
+
+Obstacle.prototype.update = function() {
+   return;
+};
 
 var Wire = exports.Wire = function(options) {
    Wire.superConstructor.apply(this, arguments);
@@ -55,6 +60,12 @@ var Wire = exports.Wire = function(options) {
       this.isHidden = false;
    } else {
       this.isHidden = true;
+   }
+
+   if (options.inactive == undefined) {
+      this.isActive = true;
+   } else {
+      this.isActive = false;
    }
 
    this.rect = new gamejs.Rect(options.pos, [this.image.rect.width, this.image.rect.height]);
@@ -94,7 +105,21 @@ Wire.prototype.cut = function() {
    return;
 };
 
+Wire.prototype.activate = function() {
+   if (this.isActive === true) {
+      return;
+   }
+   this. isActive = true;
+   return;
+};
 
+Wire.prototype.show = function() {
+   if (this.isHidden === false) {
+      return;
+   }
+   this.isHidden = false;
+   return;
+};
 
 var Pointer = exports.Pointer = function(options) {
    Pointer.superConstructor.apply(this, arguments);

@@ -29,12 +29,15 @@ gamejs.preload([
   './static/bombs/wire_blue_cut.png',
   './static/bombs/wire_yellow.png',
   './static/bombs/wire_yellow_cut.png',
+  './static/bombs/lid_closed.png',
+
   './static/bombs/panel_down.png',
   './static/bombs/panel_up.png',
   './static/bombs/screw.png',
   './static/bombs/unscrewed.png',
-
+  //icons
   './static/icons/snippers_open.png',
+  './static/icons/drill.png',
   //sounds
   'static/sounds/testo.ogg',
   'static/sounds/snip.ogg',

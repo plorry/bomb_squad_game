@@ -137,9 +137,10 @@ var Bomb = exports.Bomb = function(director, bombId) {
 
 		if (event.type === gamejs.event.MOUSE_DOWN) {
 			var wiresClickedOn = wires.collidePoint(event.pos);
+			var obsClickedOn = obstacles.collidePoint(event.pos);
 			if (wiresClickedOn.length > 0) {
 				wiresClickedOn.forEach(function(wire){
-					if (!wire.isCut && !wire.isHidden){
+					if (!wire.isCut && wire.isActive){
 						wire.cut();
 						if (wire.order != step) {
 							timer = 0;
@@ -151,16 +152,38 @@ var Bomb = exports.Bomb = function(director, bombId) {
 					}
 				});
 			}
+			if (obsClickedOn.length > 0) {
+				obsClickedOn.forEach(function(obstacle){
+					if (!obstacle.isSolved){
+						obstacle.solve();
+						sounds.snip();
+					}
+				});
+			}
 		}
 		
 		if (wires.collidePoint(event.pos).length > 0){
 			wires.collidePoint(event.pos).forEach(function(wire){
-				if (pointer.image != wire.icon && !wire.isCut){
+				if (pointer.image != wire.icon && wire.isActive){
 					//debug_val = 'diff!';
 					pointer.setImage(wire.icon);
 				}
+				if (!wire.isActive) {
+					pointer.setNull();
+				}
 			});
-		} else {
+		}
+
+		if (obstacles.collidePoint(event.pos).length > 0){
+			obstacles.collidePoint(event.pos).forEach(function(obstacle){
+				if (pointer.image != obstacle.icon && !obstacle.isSolved){
+					//debug_val = 'diff!';
+					pointer.setImage(obstacle.icon);
+				}
+			});
+		}
+
+		if (obstacles.collidePoint(event.pos).length == 0 && wires.collidePoint(event.pos).length == 0) {
 			if (pointer.image != null) {
 				pointer.setNull();
 			}
@@ -203,16 +226,40 @@ var Bomb = exports.Bomb = function(director, bombId) {
 			timer = 0;
 		}
 
+		var num_obstacles;
+
+		wires.forEach(function(wire){
+			num_obstacles = 0;
+			obstacles.forEach(function(obstacle){
+				if (!obstacle.isSolved && wire.order == obstacle.trap_id) {
+					num_obstacles++;
+				}
+			});
+			debug_val = num_obstacles;
+			if (num_obstacles > 0) {
+				wire.isActive = false;
+			} else {
+				wire.activate();
+			}
+		});
+
 	};
 
 	this.draw = function(display) {
 		display.fill("#ffffff");
 		display.blit(image);
-		wires.draw(display);
+		wires.forEach(function(wire){
+			if (!wire.isHidden){
+				wire.draw(display);
+			}
+		});
 		obstacles.draw(display);
 		
 		debug_val = font.render(debug_val, '#555');
-		display.blit(timer_display, TIMER_POS);
+		if (step >= show_timer){
+			display.blit(timer_display, TIMER_POS);
+		}
+
 		//display.blit(debug_val, [0,0]);
 
 		if (!pointer.isHidden){
@@ -223,6 +270,12 @@ var Bomb = exports.Bomb = function(director, bombId) {
 	function initBomb(bombConfig) {
 		image = gamejs.image.load(bombConfig.image);
 		pointer = new Pointer(config.pointer[0]);
+
+		if (!bombConfig.show_timer == undefined) {
+			show_timer = bombConfig.show_timer;
+		} else {
+			show_timer = 0;
+		}
 
 		wires = new gamejs.sprite.Group();
 		bombConfig.traps.forEach(function(w){
