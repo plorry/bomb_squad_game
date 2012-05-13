@@ -149,6 +149,7 @@ Pointer.prototype.update = function(msDuration) {
 
 Pointer.prototype.setImage = function(new_image) {
    this.image = gamejs.image.load(new_image);
+   this.rect = new gamejs.Rect([0,0],[this.image.rect.width, this.image.rect.height]);
    return;
 };
 
@@ -159,6 +160,8 @@ Pointer.prototype.setNull = function() {
 };
 
 Pointer.prototype.setPos = function(position) {
-   this.rect.topleft = [position[0], position[1]-65];
+   if (this.image != null){
+      this.rect.topleft = [position[0], position[1]-(this.image.rect.height)];
+   }
    return;
 };

@@ -38,6 +38,8 @@ gamejs.preload([
   //graphics
   './static/bombs/bomb_1.png',
   './static/bombs/bomb_2.png',
+  './static/bombs/bomb_3.png',
+
   './static/bombs/wire_red.png',
   './static/bombs/wire_red_cut.png',
   './static/bombs/wire_green.png',
@@ -53,6 +55,17 @@ gamejs.preload([
   './static/bombs/vial_3.png',
   './static/bombs/vial_4.png',
   './static/bombs/vial_2_empty.png',
+  './static/bombs/vert_wire_1.png',
+  './static/bombs/vert_wire_2.png',
+  './static/bombs/vert_wire_3.png',
+  './static/bombs/vert_wire_4.png',
+  './static/bombs/vert_wire_1_cut.png',
+  './static/bombs/vert_wire_2_cut.png',
+  './static/bombs/vert_wire_3_cut.png',
+  './static/bombs/vert_wire_4_cut.png',
+  './static/bombs/tile.png',
+  './static/bombs/trigger.png',
+  './static/bombs/trigger_dead.png',
 
   './static/bombs/panel_down.png',
   './static/bombs/panel_up.png',

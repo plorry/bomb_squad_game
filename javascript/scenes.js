@@ -13,6 +13,7 @@ var font = new gamejs.font.Font('20px Lucida Console');
 var TIMER_COLOR = '#F00F00';
 var TIMER_POS = [125,58];
 var VICTORY_CUTSCENE = 0;
+var JOKE_CUTSCENES = [1,18];
 
 var currentLevel = 0;
 
@@ -214,7 +215,7 @@ var Bomb = exports.Bomb = function(director, bombId) {
 		}
 
 		if (timer < -100 && !isDefused) {
-			next_cutscene = Math.floor((Math.random() * 18) + 1);
+			next_cutscene = Math.floor((Math.random() * JOKE_CUTSCENES[1]) + JOKE_CUTSCENES[0]);
 			director.replaceScene(new Cutscene(director, next_cutscene));
 		}
 
@@ -235,6 +236,9 @@ var Bomb = exports.Bomb = function(director, bombId) {
 			obstacles.forEach(function(obstacle){
 				if (!obstacle.isSolved && wire.order == obstacle.trap_id) {
 					num_obstacles++;
+				}
+				if (!obstacle.isSolved && obstacle.trap_id == 'all'){
+					num_obstacles++;				
 				}
 			});
 			debug_val = num_obstacles;
@@ -273,7 +277,7 @@ var Bomb = exports.Bomb = function(director, bombId) {
 		image = gamejs.image.load(bombConfig.image);
 		pointer = new Pointer(config.pointer[0]);
 
-		if (!bombConfig.show_timer == undefined) {
+		if (bombConfig.show_timer != undefined) {
 			show_timer = bombConfig.show_timer;
 		} else {
 			show_timer = 0;
