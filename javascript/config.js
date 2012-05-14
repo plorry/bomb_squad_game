@@ -21,7 +21,7 @@ exports.cutscenes = [
 	{"panels":[
 		{'image':'./static/backgrounds/after_bomb_one_01.png', 'music':'', 'sound':'static/sounds/after_bomb_one_01.ogg', 'duration':'nope'},
 		{'image':'./static/backgrounds/after_bomb_one_02.png', 'music':'', 'sound':'static/sounds/after_bomb_one_02.ogg', 'duration':'nope'},
-		{'image':'./static/backgrounds/after_bomb_one_03.png', 'music':'', 'sound':'static/sounds/after_bomb_one_03.ogg', 'duration':'nope'},
+		{'image':'./static/backgrounds/after_bomb_one_02.png', 'music':'', 'sound':'static/sounds/after_bomb_one_03.ogg', 'duration':'nope'},
 	]},
 	// 3 - After 2nd bomb
 	{"panels":[
@@ -155,18 +155,13 @@ exports.cutscenes = [
 		{'image':'./static/backgrounds/death_46.png', "music":'', "sound":'', 'duration':1500},
 		{'image':'./static/backgrounds/death_46.png', "music":'', "sound":'static/sounds/explosion.ogg', 'duration':'nope'},
 	]},
-	//Ending
+	//40 - Ending
 	{"panels":[
 		{'image':'./static/backgrounds/ending_01.png', 'music':'', 'sound':'static/sounds/ending_01.ogg', 'duration':'nope'},
 		{'image':'./static/backgrounds/ending_02.png', 'music':'', 'sound':'static/sounds/ending_02.ogg', 'duration':'nope'},
 		{'image':'./static/backgrounds/ending_03.png', 'music':'', 'sound':'', 'duration':1500},
 		{'image':'./static/backgrounds/ending_04.png', 'music':'', 'sound':'', 'duration':1500},
 		{'image':'./static/backgrounds/ending_05.png', 'music':'', 'sound':'', 'duration':1500},
-		{'image':'./static/backgrounds/ending_home_01.png', 'music':'', 'sound':'', 'duration':1500},
-		{'image':'./static/backgrounds/ending_home_02.png', 'music':'', 'sound':'', 'duration':1500},
-		{'image':'./static/backgrounds/ending_home_03.png', 'music':'', 'sound':'', 'duration':1500},
-
-
 	]},
 ];
 

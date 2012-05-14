@@ -77,11 +77,12 @@ var Cutscene = exports.Cutscene = function(director, cutsceneId) {
 				} else {
 					director.replaceScene(new Bomb(director, currentLevel));
 				}
-				if (cutsceneId == VICTORY_CUTSCENE) {
+				if (cutsceneId == ENDING) {
 					currentLevel = 0;
 					currentPanel = 0;
 					elapsed = 0;
-					director.replaceScene(new Cutscene(director, TITLE_SCREEN));
+					var next_scene = new scenes.Cutscene(director, TITLE_SCREEN);
+					director.start(next_scene);
 				}
 			}
 			elapsed = 0;
@@ -101,7 +102,7 @@ var Cutscene = exports.Cutscene = function(director, cutsceneId) {
 			duration = sound.getLength() * 1000;
 		}
 
-		if (!(duration > 0 && duration < 5000)){
+		if (!(duration > 0 && duration < 7000)){
 			duration = sound.getLength() * 1000;
 		}
 
