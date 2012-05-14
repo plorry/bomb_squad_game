@@ -7,6 +7,7 @@ var Walkman = sprites.Walkman;
 
 gamejs.preload([
   //backgrounds
+  './static/backgrounds/title.png',
   './static/backgrounds/death_01b.png',
   './static/backgrounds/death_02.png',
   './static/backgrounds/death_04.png',
@@ -46,6 +47,42 @@ gamejs.preload([
   './static/backgrounds/opening_03.png',
   './static/backgrounds/opening_04.png',
   './static/backgrounds/opening_05.png',
+  './static/backgrounds/death_09a.png',
+  './static/backgrounds/death_09b.png',
+  './static/backgrounds/death_11a.png',
+  './static/backgrounds/death_11b.png',
+  './static/backgrounds/death_13.png',
+  './static/backgrounds/death_14.png',
+  './static/backgrounds/death_17a.png',
+  './static/backgrounds/death_17b.png',
+  './static/backgrounds/death_17c.png',
+'./static/backgrounds/death_18a.png',
+'./static/backgrounds/death_18b.png',
+'./static/backgrounds/death_18c.png',
+'./static/backgrounds/death_18d.png',
+'./static/backgrounds/death_19a.png',
+'./static/backgrounds/death_19b.png',
+'./static/backgrounds/death_26.png',
+'./static/backgrounds/death_40.png',
+'./static/backgrounds/death_41.png',
+'./static/backgrounds/death_42.png',
+'./static/backgrounds/death_44.png',
+'./static/backgrounds/death_45.png',
+'./static/backgrounds/death_46.png',
+'./static/backgrounds/after_bomb_one_01.png',
+'./static/backgrounds/after_bomb_one_02.png',
+'./static/backgrounds/after_bomb_one_03.png',
+'./static/backgrounds/after_bomb_two_01.png',
+'./static/backgrounds/after_bomb_two_02.png',
+'./static/backgrounds/ending_01.png',
+'./static/backgrounds/ending_02.png',
+'./static/backgrounds/ending_03.png',
+'./static/backgrounds/ending_04.png',
+'./static/backgrounds/ending_05.png',
+'./static/backgrounds/ending_home_01.png',
+'./static/backgrounds/ending_home_02.png',
+'./static/backgrounds/ending_home_03.png',
+
   //graphics
   './static/bombs/bomb_1.png',
   './static/bombs/bomb_2.png',
@@ -111,6 +148,35 @@ gamejs.preload([
   'static/sounds/death_35.ogg',
   'static/sounds/death_36.ogg',
   'static/sounds/death_39.ogg',
+  'static/sounds/death_09a.ogg', 
+  'static/sounds/death_09b1.ogg',
+  'static/sounds/death_09b2.ogg',
+  'static/sounds/death_11a.ogg',
+  'static/sounds/death_11b.ogg',
+'static/sounds/death_17a.ogg',
+'static/sounds/death_18c.ogg',
+'static/sounds/death_18b.ogg',
+'static/sounds/death_19b.ogg',
+'static/sounds/death_26.ogg',
+'static/sounds/death_22e.ogg',
+'static/sounds/death_40.ogg',
+'static/sounds/death_41.ogg',
+'static/sounds/death_42.ogg',
+'static/sounds/death_44.ogg',
+'static/sounds/death_45.ogg',
+'static/sounds/death_46.ogg',
+'static/sounds/opening_01.ogg',
+'static/sounds/opening_03.ogg',
+'static/sounds/opening_04.ogg',
+'static/sounds/opening_05.ogg',
+'static/sounds/after_bomb_one_01.ogg',
+'static/sounds/after_bomb_one_02.ogg',
+'static/sounds/after_bomb_one_03.ogg',
+'static/sounds/after_bomb_two_01.ogg',
+'static/sounds/after_bomb_two_02.ogg',
+'static/sounds/ending_01.ogg',
+'static/sounds/ending_02.ogg',
+'static/sounds/victory_01.ogg',
 ]);
 
 
@@ -118,7 +184,7 @@ gamejs.preload([
 function main() {
 
     var director = new Director();
-    var firstScene = new scenes.Cutscene(director, 1);
+    var firstScene = new scenes.Cutscene(director, 4);
     director.start(firstScene);
     return;
 

@@ -17,7 +17,9 @@ var VICTORY_CUTSCENE = 0;
 var OPENING_CUTSCENE = 1;
 var BOMB1_VICTORY = 2;
 var BOMB2_VICTORY = 3;
-var JOKE_CUTSCENES = [4,18];
+var TITLE_SCREEN = 4;
+var AVAIL_CUTSCENES = [5,18];
+var ENDING = 40;
 
 var currentLevel = 0;
 
@@ -44,17 +46,43 @@ var Cutscene = exports.Cutscene = function(director, cutsceneId) {
 	this.blast_amount = 0;
 
 	this.handleEvent = function(event) {
-		if (event.type === gamejs.event.KEY_DOWN) {
-			sounds.test();
+		if (event.type === gamejs.event.KEY_DOWN || event.type === gamejs.event.MOUSE_DOWN) {
+			if (cutsceneId == TITLE_SCREEN){
+				director.replaceScene(new Cutscene(director, OPENING_CUTSCENE));
+			}
 		}
 	};
 
 	this.update = function(msDuration) {
 		elapsed += msDuration;
-		if (elapsed >= duration || elapsed >=4000){
+		if ((elapsed >= duration) && cutsceneId != TITLE_SCREEN){
 			currentPanel += 1;
 			if (currentPanel >= panels.length) {
-				director.replaceScene(new Bomb(director, currentLevel));
+				if (cutsceneId == VICTORY_CUTSCENE) {
+					if (currentLevel == 1) {
+						currentPanel=0;
+						elapsed=0;
+						director.replaceScene(new Cutscene(director, BOMB1_VICTORY));
+					}
+					if (currentLevel == 2) {
+						currentPanel=0;
+						elapsed=0;
+						director.replaceScene(new Cutscene(director, BOMB2_VICTORY));
+					}
+					if (currentLevel == 3) {
+						currentPanel=0;
+						elapsed=0;
+						director.replaceScene(new Cutscene(director, ENDING));
+					}
+				} else {
+					director.replaceScene(new Bomb(director, currentLevel));
+				}
+				if (cutsceneId == VICTORY_CUTSCENE) {
+					currentLevel = 0;
+					currentPanel = 0;
+					elapsed = 0;
+					director.replaceScene(new Cutscene(director, TITLE_SCREEN));
+				}
 			}
 			elapsed = 0;
 			image = gamejs.image.load(panels[currentPanel].image);
@@ -73,8 +101,12 @@ var Cutscene = exports.Cutscene = function(director, cutsceneId) {
 			duration = sound.getLength() * 1000;
 		}
 
+		if (!(duration > 0 && duration < 5000)){
+			duration = sound.getLength() * 1000;
+		}
+
 		if (this.blast) {
-			this.blast_amount += (msDuration / 3);
+			this.blast_amount += (msDuration / 2);
 		}
 	};
 
@@ -201,7 +233,12 @@ var Bomb = exports.Bomb = function(director, bombId) {
 	};
 
 	this.update = function(msDuration) {
-
+		if (currentLevel == 1) {
+			AVAIL_CUTSCENES[1] = 28;
+		}
+		if (currentLevel == 2) {
+			AVAIL_CUTSCENES[1] = 35;
+		}
 		wires.forEach(function(wire){
 			wire.update(msDuration);
 		});
@@ -221,7 +258,7 @@ var Bomb = exports.Bomb = function(director, bombId) {
 		}
 
 		if (timer < -100 && !isDefused) {
-			next_cutscene = Math.floor((Math.random() * JOKE_CUTSCENES[1]) + JOKE_CUTSCENES[0]);
+			next_cutscene = Math.floor((Math.random() * AVAIL_CUTSCENES[1]) + AVAIL_CUTSCENES[0]);
 			director.replaceScene(new Cutscene(director, next_cutscene));
 		}
 

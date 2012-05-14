@@ -7,27 +7,32 @@ exports.SCALE = 2;
 exports.cutscenes = [
 	//0 - ALWAYS victory
 	{"panels":[
-		{'image':'./static/backgrounds/victory_01.png', 'music':'', 'sound':'', 'duration':3000},
+		{'image':'./static/backgrounds/victory_01.png', 'music':'', 'sound':'static/sounds/victory_01.ogg', 'duration':3000},
 	]},
 	//1 - INTRO
 	{"panels":[
-		{'image':'./static/backgrounds/opening_01.png', 'music':'', 'sound':'', 'duration':2000},
+		{'image':'./static/backgrounds/opening_01.png', 'music':'', 'sound':'static/sounds/opening_01.ogg', 'duration':'nope'},
 		{'image':'./static/backgrounds/opening_02.png', 'music':'', 'sound':'', 'duration':2000},
-		{'image':'./static/backgrounds/opening_03.png', 'music':'', 'sound':'', 'duration':2000},
-		{'image':'./static/backgrounds/opening_04.png', 'music':'', 'sound':'', 'duration':2000},
-		{'image':'./static/backgrounds/opening_05.png', 'music':'', 'sound':'', 'duration':2000},
+		{'image':'./static/backgrounds/opening_03.png', 'music':'', 'sound':'static/sounds/opening_03.ogg', 'duration':'nope'},
+		{'image':'./static/backgrounds/opening_04.png', 'music':'', 'sound':'static/sounds/opening_04.ogg', 'duration':'nope'},
+		{'image':'./static/backgrounds/opening_05.png', 'music':'', 'sound':'static/sounds/opening_05.ogg', 'duration':'nope'},
 	]},
 	// 2 - After first Bomb
 	{"panels":[
-		{'image':'./static/backgrounds/after_bomb_one_01.png', 'music':'', 'sound':'', 'duration':2000},
-		{'image':'./static/backgrounds/after_bomb_one_02.png', 'music':'', 'sound':'', 'duration':2000},
+		{'image':'./static/backgrounds/after_bomb_one_01.png', 'music':'', 'sound':'static/sounds/after_bomb_one_01.ogg', 'duration':'nope'},
+		{'image':'./static/backgrounds/after_bomb_one_02.png', 'music':'', 'sound':'static/sounds/after_bomb_one_02.ogg', 'duration':'nope'},
+		{'image':'./static/backgrounds/after_bomb_one_03.png', 'music':'', 'sound':'static/sounds/after_bomb_one_03.ogg', 'duration':'nope'},
 	]},
 	// 3 - After 2nd bomb
 	{"panels":[
-		{'image':'./static/backgrounds/after_bomb_two_01.png', 'music':'', 'sound':'', 'duration':2000},
-		{'image':'./static/backgrounds/after_bomb_two_02.png', 'music':'', 'sound':'', 'duration':2000},
+		{'image':'./static/backgrounds/after_bomb_two_01.png', 'music':'', 'sound':'static/sounds/after_bomb_two_01.ogg', 'duration':'nope'},
+		{'image':'./static/backgrounds/after_bomb_two_02.png', 'music':'', 'sound':'static/sounds/after_bomb_two_02.ogg', 'duration':'nope'},
 	]},
-	//4 - 21 - jokes
+	//4 - title screen
+	{"panels":[
+		{'image':'./static/backgrounds/title.png', 'music':'', 'sound':'', 'duration':2000},
+	]},
+	//5 - 22 - jokes
 	{"panels":[{'image':'./static/backgrounds/death_02.png', "music":'', "sound":'static/sounds/death_02.ogg', 'duration':'nope'},
 		{'image':'./static/backgrounds/death_01b.png', "music":'', "sound":'static/sounds/explosion.ogg', 'duration':2000},]},
 	{"panels":[{'image':'./static/backgrounds/death_04.png', "music":'', "sound":'static/sounds/death_04.ogg', 'duration':'nope'},
@@ -64,34 +69,104 @@ exports.cutscenes = [
 		{'image':'./static/backgrounds/death_01b.png', "music":'', "sound":'static/sounds/explosion.ogg', 'duration':2000},]},
 	{"panels":[{'image':'./static/backgrounds/death_39.png', "music":'', "sound":'static/sounds/death_39.ogg', 'duration':'nope'},
 		{'image':'./static/backgrounds/death_01b.png', "music":'', "sound":'static/sounds/explosion.ogg', 'duration':2000},]},
-//
+	//
+	//BATCH 2 - 23-32
+	{"panels":[
+		{'image':'./static/backgrounds/death_09a.png', "music":'', "sound":'static/sounds/death_09a.ogg', 'duration':'nope'},
+		{'image':'./static/backgrounds/death_09b.png', "music":'', "sound":'static/sounds/death_09b1.ogg', 'duration':'nope'},
+		{'image':'./static/backgrounds/death_09b.png', "music":'', "sound":'static/sounds/explosion.ogg', 'duration':'nope'},
+	]},
+	{"panels":[
+		{'image':'./static/backgrounds/death_09a.png', "music":'', "sound":'static/sounds/death_09a.ogg', 'duration':'nope'},
+		{'image':'./static/backgrounds/death_09b.png', "music":'', "sound":'static/sounds/death_09b2.ogg', 'duration':'nope'},
+		{'image':'./static/backgrounds/death_09b.png', "music":'', "sound":'static/sounds/explosion.ogg', 'duration':'nope'},
+	]},
+	{"panels":[
+		{'image':'./static/backgrounds/death_11a.png', "music":'', "sound":'static/sounds/death_11a.ogg', 'duration':'nope'},
+		{'image':'./static/backgrounds/death_11b.png', "music":'', "sound":'static/sounds/death_11b.ogg', 'duration':'nope'},
+		{'image':'./static/backgrounds/death_11b.png', "music":'', "sound":'static/sounds/explosion.ogg', 'duration':'nope'},
+	]},
+	//17
+	{"panels":[
+		{'image':'./static/backgrounds/death_17a.png', "music":'', "sound":'static/sounds/death_17a.ogg', 'duration':1500},
+		{'image':'./static/backgrounds/death_17b.png', "music":'', "sound":'', 'duration':1500},
+		{'image':'./static/backgrounds/death_17c.png', "music":'', "sound":'', 'duration':1500},
+		{'image':'./static/backgrounds/death_17c.png', "music":'', "sound":'static/sounds/explosion.ogg', 'duration':'nope'},
+	]},
+	//18
+	{"panels":[
+		{'image':'./static/backgrounds/death_18a.png', "music":'', "sound":'', 'duration':1500},
+		{'image':'./static/backgrounds/death_18b.png', "music":'', "sound":'static/sounds/death_18b.ogg', 'duration':'nope'},
+		{'image':'./static/backgrounds/death_18c.png', "music":'', "sound":'static/sounds/death_18c.ogg', 'duration':'nope'},
+		{'image':'./static/backgrounds/death_18d.png', "music":'', "sound":'', 'duration':1500},
+		{'image':'./static/backgrounds/death_18d.png', "music":'', "sound":'static/sounds/explosion.ogg', 'duration':'nope'},
+	]},
+	{"panels":[
+		{'image':'./static/backgrounds/death_19a.png', "music":'', "sound":'', 'duration':1500},
+		{'image':'./static/backgrounds/death_19b.png', "music":'', "sound":'', 'duration':1500},
+		{'image':'./static/backgrounds/death_19b.png', "music":'', "sound":'static/sounds/explosion.ogg', 'duration':'nope'},
+	]},
+	{"panels":[{'image':'./static/backgrounds/death_13.png', "music":'', "sound":'static/sounds/explosion.ogg', 'duration':2000},]},
+	{"panels":[{'image':'./static/backgrounds/death_14.png', "music":'', "sound":'static/sounds/explosion.ogg', 'duration':2000},]},
 	{"panels":[
 		{'image':'./static/backgrounds/death_22a.png', "music":'', "sound":'', 'duration':1500},
 		{'image':'./static/backgrounds/death_22b.png', "music":'', "sound":'', 'duration':1500},
 		{'image':'./static/backgrounds/death_22c.png', "music":'', "sound":'', 'duration':1500},
 		{'image':'./static/backgrounds/death_22d.png', "music":'', "sound":'', 'duration':1500},
-		{'image':'./static/backgrounds/death_22e.png', "music":'', "sound":'', 'duration':1500},
+		{'image':'./static/backgrounds/death_22e.png', "music":'', "sound":'static/sounds/death_22e.ogg', 'duration':'nope'},
 		{'image':'./static/backgrounds/death_22f.png', "music":'', "sound":'', 'duration':1500},
 		{'image':'./static/backgrounds/death_22f.png', "music":'', "sound":'static/sounds/explosion.ogg', 'duration':1500},
 	]},
-
-	{"panels":[
-		{'image':'./static/backgrounds/death_01b.png', "music":'','sound':'', 'duration':3000},
-	]},
-	//1 - harder than I thought
-	{"panels":[
-		{'image':'./static/backgrounds/death_02.png', "music":'', "sound":'static/sounds/death_02.ogg', 'duration':'nope'},
-		{'image':'./static/backgrounds/death_01b.png', "music":'', "sound":'static/sounds/explosion.ogg', 'duration':2000},
-	]},
 	//3 - deer in the woods
 	{"panels":[
-		{'image':'./static/backgrounds/death_05.png', "music":'', "sound":'', 'duration':1500},
 		{'image':'./static/backgrounds/death_15a.png', "music":'', "sound":'', 'duration':1500},
 		{'image':'./static/backgrounds/death_15b.png', "music":'', "sound":'', 'duration':1500},
 		{'image':'./static/backgrounds/death_15c.png', "music":'', "sound":'', 'duration':1500},
 		{'image':'./static/backgrounds/death_15d.png', "music":'', "sound":'', 'duration':1500},
 		{'image':'./static/backgrounds/death_15e.png', "music":'', "sound":'', 'duration':2500},
 		{'image':'./static/backgrounds/death_15e.png', "music":'', "sound":'static/sounds/explosion.ogg', 'duration':1500},
+	]},
+	//BATCH 3
+	{"panels":[
+		{'image':'./static/backgrounds/death_26.png', "music":'', "sound":'static/sounds/death_26.ogg', 'duration':'nope'},
+		{'image':'./static/backgrounds/death_26.png', "music":'', "sound":'static/sounds/explosion.ogg', 'duration':'nope'},
+	]},
+	{"panels":[
+		{'image':'./static/backgrounds/death_40.png', "music":'', "sound":'static/sounds/death_40.ogg', 'duration':'nope'},
+		{'image':'./static/backgrounds/death_40.png', "music":'', "sound":'static/sounds/explosion.ogg', 'duration':'nope'},
+	]},
+	{"panels":[
+		{'image':'./static/backgrounds/death_41.png', "music":'', "sound":'static/sounds/death_41.ogg', 'duration':'nope'},
+		{'image':'./static/backgrounds/death_41.png', "music":'', "sound":'static/sounds/explosion.ogg', 'duration':'nope'},
+	]},
+	{"panels":[
+		{'image':'./static/backgrounds/death_42.png', "music":'', "sound":'static/sounds/death_42.ogg', 'duration':'nope'},
+		{'image':'./static/backgrounds/death_42.png', "music":'', "sound":'static/sounds/explosion.ogg', 'duration':'nope'},
+	]},
+	{"panels":[
+		{'image':'./static/backgrounds/death_44.png', "music":'', "sound":'static/sounds/death_44.ogg', 'duration':'nope'},
+		{'image':'./static/backgrounds/death_44.png', "music":'', "sound":'static/sounds/explosion.ogg', 'duration':'nope'},
+	]},
+	{"panels":[
+		{'image':'./static/backgrounds/death_45.png', "music":'', "sound":'', 'duration':1500},
+		{'image':'./static/backgrounds/death_45.png', "music":'', "sound":'static/sounds/explosion.ogg', 'duration':'nope'},
+	]},
+	{"panels":[
+		{'image':'./static/backgrounds/death_46.png', "music":'', "sound":'', 'duration':1500},
+		{'image':'./static/backgrounds/death_46.png', "music":'', "sound":'static/sounds/explosion.ogg', 'duration':'nope'},
+	]},
+	//Ending
+	{"panels":[
+		{'image':'./static/backgrounds/ending_01.png', 'music':'', 'sound':'static/sounds/ending_01.ogg', 'duration':'nope'},
+		{'image':'./static/backgrounds/ending_02.png', 'music':'', 'sound':'static/sounds/ending_02.ogg', 'duration':'nope'},
+		{'image':'./static/backgrounds/ending_03.png', 'music':'', 'sound':'', 'duration':1500},
+		{'image':'./static/backgrounds/ending_04.png', 'music':'', 'sound':'', 'duration':1500},
+		{'image':'./static/backgrounds/ending_05.png', 'music':'', 'sound':'', 'duration':1500},
+		{'image':'./static/backgrounds/ending_home_01.png', 'music':'', 'sound':'', 'duration':1500},
+		{'image':'./static/backgrounds/ending_home_02.png', 'music':'', 'sound':'', 'duration':1500},
+		{'image':'./static/backgrounds/ending_home_03.png', 'music':'', 'sound':'', 'duration':1500},
+
+
 	]},
 ];
 
